@@ -1,8 +1,9 @@
 import React from 'react';
 import Cards from './Cards.js'
+import OppCards from './OppCards.js'
 import EndTurnButton from './EndTurnButton.js';
 
-const Board = ({cards, endTurnButtonOnClick, isTurn}) => {
+const Board = ({cards, oppCards, endTurnButtonOnClick, isTurn}) => {
   const boardStyle = {
     width: '100%',
     height: '100vh',
@@ -20,6 +21,7 @@ const Board = ({cards, endTurnButtonOnClick, isTurn}) => {
     <div style={boardStyle}>
         <div style={lineStyle}></div>
         <Cards cards={cards}/>
+        <OppCards cards={oppCards}/>
         <EndTurnButton onClick={endTurnButtonOnClick} isTurn={isTurn}/>
         {/* Content goes here */}
     </div>

@@ -8,6 +8,7 @@ const Card = ({ type }) => {
         mountain: { className: 'mountain', label: 'Mountain' },
         plains: { className: 'plains', label: 'Plains' },
         swamp: { className: 'swamp', label: 'Swamp' },
+        unknown: { className: 'unknown', label: '?' },
       };
  
     const cardTypeText = cardTypes[type] || { className: '', label: 'Default' };

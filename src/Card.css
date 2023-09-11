@@ -32,6 +32,10 @@
     background: rgb(179, 42, 52);
 }
 
+.unknown{
+    background: rgb(98, 52, 18);
+}
+
 .card:hover {
     transform: translateY(-10px);
     z-index: 1;

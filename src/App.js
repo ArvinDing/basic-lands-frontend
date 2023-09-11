@@ -12,6 +12,10 @@ const cardData = [
   {type: "forest"}
 ];
 
+const oppCardData = [
+  { type: "unknown" }
+];
+
 const appStyle = {
   height:'100%'
 }
@@ -22,7 +26,7 @@ class App extends Component{
     this.socket = null;
     this.myTurn = false;
     this.state={
-      loading: true,
+      loading: false,
       dots: 0,
       joinPage: false
     }
@@ -85,7 +89,7 @@ class App extends Component{
     return (
       <div className="App" style={appStyle}>
         <h1>{this.myTurn}</h1>
-        <Board cards= {cardData} isTurn={this.myTurn} endTurnButtonOnClick={()=>{this.endTurn()}}/>
+        <Board cards= {cardData} oppCards={oppCardData} isTurn={this.myTurn} endTurnButtonOnClick={()=>{this.endTurn()}}/>
       </div>
     );
   }

@@ -1,0 +1,8 @@
+/* OppCards.css */
+.opp-cards-container {
+    display: flex;
+    flex-direction: row; /* Display cards from left to right */
+    justify-content: center; /* Center cards horizontally */
+    align-items: center; /* Center cards vertically */
+}
+  
