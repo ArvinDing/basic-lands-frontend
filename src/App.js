@@ -49,6 +49,11 @@ class App extends Component{
       alert("waiting for other player")
     })
 
+    this.socket.on("new turn", (board_info)=>{
+      console.log("board state changed")
+      this.myTurn = board_info.myTurn;
+    });
+
     this.dotsIntervalId = setInterval(() => {
       this.setState({dots: (this.state.dots+1)%4});
     }, 500)
