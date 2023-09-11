@@ -1,0 +1,19 @@
+/* EndTurnButton.css */
+.end-turn-button {
+    background-color: #4285f4; /* Adjust the color as needed */
+    color: #fff; /* Text color */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 22px;
+    transition: background-color 0.2s;
+    top: 48%;
+    right: 4%;
+    position: absolute;
+  }
+  
+  .end-turn-button:hover {
+    background-color: #3570e5; /* Adjust the hover color as needed */
+  }
+  

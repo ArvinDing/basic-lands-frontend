@@ -1,0 +1,38 @@
+/* Card.css */
+.card {
+    width: 100px;
+    height: 143px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    margin-left: -20px;
+    transition: transform 0.4s;     
+  }
+  
+.swamp{
+    background: rgb(87, 84, 82);
+}
+
+.forest{
+    background: rgb(17, 101, 58);
+}
+
+.plains{
+    background: rgb(137, 114, 41);
+}
+.island{
+    background: rgb(11, 111, 187);
+}
+
+.mountain{
+    background: rgb(179, 42, 52);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    z-index: 1;
+}
