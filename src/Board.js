@@ -3,6 +3,7 @@ import Cards from './Cards.js'
 import OppCards from './OppCards.js'
 import EndTurnButton from './EndTurnButton.js';
 import Graveyard from './Graveyard.js';
+import Deck from './Deck.js'
 
 const Board = ({ cards, playCard, selectIdx, setSelectIdx, oppCards, endTurnButtonOnClick, isTurn }) => {
   const boardStyle = {
@@ -19,7 +20,7 @@ const Board = ({ cards, playCard, selectIdx, setSelectIdx, oppCards, endTurnButt
     left: '0',
     right: '0',
   }
-  let divElement= null
+  let divElement = null
 
   const handleBoardClick = (event) => {
     if (event.target === divElement) {
@@ -27,14 +28,16 @@ const Board = ({ cards, playCard, selectIdx, setSelectIdx, oppCards, endTurnButt
     }
   };
 
-    return (
+  return (
     <div style={boardStyle} ref={(div) => (divElement = div)} onClick={handleBoardClick}>
       <div style={lineStyle}></div>
-      <Cards cards={cards} selectIdx={selectIdx} setSelectIdx={setSelectIdx}/>
+      <Cards cards={cards} selectIdx={selectIdx} setSelectIdx={setSelectIdx} />
       <OppCards cards={oppCards} />
       <EndTurnButton onClick={endTurnButtonOnClick} isTurn={isTurn} />
-      <Graveyard cards={cards} />{/* your graveyard*/}
-      <Graveyard cards={cards} style={{ marginTop: '10%' }} />{/* opponent graveyard*/}
+      <Graveyard cards={cards} />
+      <Graveyard cards={cards} opponent />
+      <Deck cardCnt={10} />
+      <Deck cardCnt={10} opponent />
     </div>
   );
 };

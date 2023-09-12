@@ -20,6 +20,6 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.hoverChange:hover {
   background-color: #0056b3;
 }

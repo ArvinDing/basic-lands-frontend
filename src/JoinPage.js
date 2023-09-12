@@ -13,7 +13,7 @@ const JoinPage = ({ onClick }) => {
     <div className="join-page">
       <h1>Basic Lands Game</h1>
       <input type="text" id="gameID" placeholder="Enter Game ID" />
-      <button onClick={handleClick}>Play</button>
+      <button class="hoverChange" onClick={handleClick}>Play</button>
     </div>
   );
 };

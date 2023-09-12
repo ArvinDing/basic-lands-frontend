@@ -3,17 +3,11 @@ import React from 'react';
 import './EndTurnButton.css';
 
 const EndTurnButton = ({ onClick, isTurn }) => {
-  if(isTurn){
-    return (
-      <button className="end-turn-button hover-button" onClick={onClick}>
-        End Turn
-      </button>
-    );
-  }
-
+  let hoverClass = isTurn ? 'hoverChange' : '';
+  let text = isTurn ? 'End Turn' : 'Enemy Turn';
   return (
-    <button className="end-turn-button" onClick={onClick} disabled>
-      Enemy Turn
+    <button className={`end-turn-button ${hoverClass}`} onClick={onClick}>
+      {text}
     </button>
   );
 };

@@ -46,7 +46,7 @@
     border: 10px solid rgb(0, 217, 255);
 }
 
-.shiftUp{
+.shiftUp {
     transform: translateY(-20px);
     z-index: 1;
 }

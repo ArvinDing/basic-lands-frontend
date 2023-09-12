@@ -85,14 +85,14 @@ class App extends Component {
   }
 
   setSelectIdx = (idx) => {
-    if (idx == this.state.selectIdx)
+    if (idx === this.state.selectIdx)
       this.setState({ selectIdx: -1 })
     else
       this.setState({ selectIdx: idx })
   }
 
   playCard = () => {
-    if(this.state.selectIdx!=-1){
+    if(this.state.selectIdx!==-1){
       alert("played" + this.state.selectIdx)
       this.setState({ selectIdx: -1 })
     }

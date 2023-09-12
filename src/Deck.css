@@ -1,4 +1,4 @@
-.graveyard-container {
+.deck-container {
     display: flex;
     flex-direction: row;
     /* Display cards from left to right */
@@ -6,7 +6,7 @@
     /* Align to the left horizontally */
     align-items: flex-start;
     /* Align to the top vertically */
-    margin-left: 5%;
+    margin-left: 90%;
     margin-top: 0%;
     width: 150px;
 }
