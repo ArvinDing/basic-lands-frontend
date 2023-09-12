@@ -38,6 +38,15 @@
 }
 
 .hoverable:hover {
-    transform: translateY(-10px);
+    transform: translateY(-20px);
+    z-index: 1;
+}
+
+.outlined {
+    border: 10px solid rgb(0, 217, 255);
+}
+
+.shiftUp{
+    transform: translateY(-20px);
     z-index: 1;
 }

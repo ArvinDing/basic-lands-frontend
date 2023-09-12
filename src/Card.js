@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css'; // Import the CSS for styling the card
 
-const Card = ({ type, style, hoverEffect }) => {
+const Card = ({ type, style, hoverEffect, onClick, selected }) => {
   const cardTypes = {
     forest: { className: 'forest', label: 'Forest' },
     island: { className: 'island', label: 'Island' },
@@ -12,15 +12,17 @@ const Card = ({ type, style, hoverEffect }) => {
   };
 
   const hoverEffectClass = hoverEffect ? 'hoverable' : '';
+  const outlineClass = selected ? 'outlined' : '';
+  const shiftupClass = selected ? 'shiftUp' : '';
+
   const cardTypeText = cardTypes[type] || { className: '', label: 'Default' };
 
   return (
-    <div className={`card ${type} ${hoverEffectClass}`} style={style}>
+    <div className={`card ${type} ${hoverEffectClass} ${outlineClass} ${shiftupClass}`} style={style}
+      onClick={() => { if (onClick) { onClick() } }}>
       <b>{cardTypeText.label}</b>
     </div>
   );
-
-
 };
 
 export default Card;

@@ -4,7 +4,7 @@ import './Graveyard.css'
 
 const Graveyard = ({ cards, style }) => {
   const graveyardStyle = {
-    marginLeft: '-40px',
+    marginLeft: '-60px',
     width:'50px',
     height:'71px'
   };
