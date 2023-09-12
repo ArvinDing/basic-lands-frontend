@@ -1,8 +1,8 @@
 import React from 'react';
 import './JoinPage.css'
 
-const JoinPage = ({onClick}) => {
-  const handleClick=()=>{
+const JoinPage = ({ onClick }) => {
+  const handleClick = () => {
     const gameIdInput = document.getElementById("gameID");
     if (gameIdInput) {
       const gameId = gameIdInput.value;

@@ -1,11 +1,13 @@
-/* Cards.css */
 .cards-container {
     position: fixed;
     bottom: 0;
     width: 100%;
     display: flex;
-    flex-direction: row; /* Display cards from left to right */
-    justify-content: center; /* Center cards horizontally */
-    align-items: center; /* Center cards vertically */
+    flex-direction: row;
+    /* Display cards from left to right */
+    justify-content: center;
+    /* Center cards horizontally */
+    align-items: center;
+    /* Center cards vertically */
+    padding: 20px
 }
-  

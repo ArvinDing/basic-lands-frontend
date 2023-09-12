@@ -1,6 +1,8 @@
-.cards-container {
+.graveyard-container {
     display: flex;
     flex-direction: row; /* Display cards from left to right */
-    justify-content: center; /* Center cards horizontally */
-    align-items: center; /* Center cards vertically */
+    justify-content: flex-start; /* Align to the left horizontally */
+    align-items: flex-start; /* Align to the top vertically */
+    margin-left:5%;
+    margin-top:0%;
 }

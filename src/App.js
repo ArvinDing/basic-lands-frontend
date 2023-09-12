@@ -94,8 +94,7 @@ class App extends Component {
 
     return (
       <div className="App" style={appStyle}>
-        <h1>{this.myTurn}</h1>
-        <Board cards= {cardData} oppCards={oppCardData} isTurn={this.myTurn} endTurnButtonOnClick={()=>{this.endTurn()}}/>
+        <Board cards={cardData} oppCards={oppCardData} isTurn={this.myTurn} endTurnButtonOnClick={() => { this.endTurn() }} />
       </div>
     );
   }

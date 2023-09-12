@@ -10,33 +10,34 @@
     justify-content: space-between;
     padding: 10px;
     margin-left: -20px;
-    transition: transform 0.4s;     
-  }
-  
-.swamp{
+    transition: transform 0.4s;
+}
+
+.swamp {
     background: rgb(87, 84, 82);
 }
 
-.forest{
+.forest {
     background: rgb(17, 101, 58);
 }
 
-.plains{
+.plains {
     background: rgb(137, 114, 41);
 }
-.island{
+
+.island {
     background: rgb(11, 111, 187);
 }
 
-.mountain{
+.mountain {
     background: rgb(179, 42, 52);
 }
 
-.unknown{
+.unknown {
     background: rgb(98, 52, 18);
 }
 
-.hoverable:hover{
+.hoverable:hover {
     transform: translateY(-10px);
     z-index: 1;
 }

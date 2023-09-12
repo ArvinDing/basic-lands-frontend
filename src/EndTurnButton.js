@@ -4,8 +4,8 @@ import './EndTurnButton.css';
 
 const EndTurnButton = ({ onClick, isTurn }) => {
   return (
-    <button className = "end-turn-button" onClick={onClick}>
-      {isTurn? "End Turn":"Enemy Turn"}
+    <button className="end-turn-button" onClick={onClick}>
+      {isTurn ? "End Turn" : "Enemy Turn"}
     </button>
   );
 };
