@@ -1,6 +1,6 @@
 .cards-container {
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     width: 100%;
     display: flex;
     flex-direction: row;
