@@ -1,38 +1,52 @@
-.pop-up-container{
+.pop-up-container {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 70vw; /* Adjust the width as needed */
-    height: 30vh; /* Adjust the height as needed */
+    width: 75vw; /* Adjust the width as needed */
+    height: 35vh; /* Adjust the height as needed */
     background-color: rgba(0, 0, 0, 0.4); /* Transparent black background */
     border-radius: 10px; /* Rounded corners, adjust as needed */
     z-index: 1000; /* Adjust the z-index to ensure it's on top of other elements */
+    padding: 0px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.pop-up-container b {
+    font-size: 30px;
+    position: relative;
+    display: inline-block;
+    color : white;
+    flex: 1;
+    text-align: center;
+
+    transform: translate(-30px, 0px);
+}
+
+.pop-up-controls-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding: 20px; /* Adjust padding as needed */
-    text-align:center;
 }
-.pop-up-container b{
-    font-size: 30px;
-    position: relative;
-    top: -15vh;
-    display: inline-block;
-    color : white;
+
+.pop-up-card-container {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    justify-content: center;
 }
 
 .close-button {
-    position: absolute; /* Position the close button */
-    top: 10px; /* Adjust top position as needed */
-    left: 10px; /* Adjust left position as needed */
+    position: relative; /* Position the close button */
     background-color: transparent;
     border: none;
     cursor: pointer;
     font-size: 24px;
     color: #fff; /* Text color for the X */
     z-index: 1001; /* Ensure it's on top of the pop-up */
+    margin-right: 10px;
 }
   
 .close-button:hover {

@@ -10,8 +10,11 @@ const PopUp = ({ cards, onClose, selectIdx, setSelectIdx, showPopUp, forest }) =
   }
   return (
     <div className="pop-up-container">
-      <button className="close-button" onClick={onClose}>X</button> {/* Close button */}
-      {(popUpText) ? <b>{popUpText}</b> : null}
+      <div className="pop-up-controls-container">
+        <button className="close-button" onClick={onClose}>X</button> {/* Close button */}
+        {(popUpText) ? <b>{popUpText}</b> : null}
+      </div>
+      <div className="pop-up-card-container">
       {(forest) ?
         (cards.map((card, index) => {
           if (index == selectIdx) {
@@ -29,6 +32,7 @@ const PopUp = ({ cards, onClose, selectIdx, setSelectIdx, showPopUp, forest }) =
         : cards.map((card, index) => (
           <Card key={index} type={card.type} />
         ))}
+      </div>
     </div>
   );
 
