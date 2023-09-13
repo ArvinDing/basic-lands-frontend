@@ -9,6 +9,11 @@ const cardData = [
   { type: "plains" },
   { type: "mountain" },
   { type: "island" },
+  { type: "forest" },
+  { type: "swamp" },
+  { type: "plains" },
+  { type: "mountain" },
+  { type: "island" },
   { type: "forest" }
 ];
 

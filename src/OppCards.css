@@ -7,5 +7,6 @@
     /* Center cards horizontally */
     align-items: center;
     /* Center cards vertically */
-    padding: 20px
+    padding: 20px;
+    margin-top: 0px;
 }

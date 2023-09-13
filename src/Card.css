@@ -1,7 +1,7 @@
 /* Card.css */
 .card {
-    width: 100px;
-    height: 143px;
+    width: 80px;
+    height: 112px;
     border: 2px solid #000;
     border-radius: 10px;
     text-align: center;
@@ -9,7 +9,6 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
-    margin-left: -20px;
     transition: transform 0.4s;
 }
 
@@ -43,7 +42,11 @@
 }
 
 .outlined {
-    border: 10px solid rgb(0, 217, 255);
+    border: 10px solid rgb(0, 0, 0);
+}
+
+.glowing{
+    border: 5px solid rgb(12, 206, 255);
 }
 
 .shiftUp {

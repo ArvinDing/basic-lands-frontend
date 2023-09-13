@@ -10,10 +10,12 @@ const cardTypes = {
   unknown: { className: 'unknown', label: '?' },
 };
 
-const Card = ({ type, graveyard, hoverEffect, onClick, selected, deck }) => {
+const Card = ({ type, graveyard, hoverEffect, onClick, selected, deck, glowing, hand, field , num}) => {
   const hoverEffectClass = hoverEffect ? 'hoverable' : '';
   const outlineClass = selected ? 'outlined' : '';
   const shiftupClass = selected ? 'shiftUp' : '';
+  const glowingClass = (glowing && !selected) ? 'glowing' : '';
+
   let style = {}
   if (graveyard) {
     style = {
@@ -21,20 +23,27 @@ const Card = ({ type, graveyard, hoverEffect, onClick, selected, deck }) => {
       width: '50px',
       height: '71px'
     }
-  }
-
-  if(deck){
+  } else if (deck) {
     style = {
-      marginLeft: '-117px'
+      marginLeft: '-97px'
+    }
+  } else if (hand) {
+    style = {
+      marginLeft: '-20px'
+    }
+  } else if (field) {
+    style = {
+      margin: '5px'
     }
   }
 
   const cardTypeText = cardTypes[type] || { className: '', label: 'Default' };
-
+  const numText = num ? num:''; 
   return (
-    <div className={`card ${type} ${hoverEffectClass} ${outlineClass} ${shiftupClass}`} style={style}
+    <div className={`card ${type} ${hoverEffectClass} ${outlineClass} ${shiftupClass} ${glowingClass}`} style={style}
       onClick={() => { if (onClick) { onClick() } }}>
       <b>{cardTypeText.label}</b>
+      <b>{numText}</b>
     </div>
   );
 };
