@@ -7,7 +7,7 @@ const Deck = ({ cardCnt, opponent }) => {
     for (let i = 0; i < cardCnt; i++) {
         cards.push({ type: "unknown" })
     }
-    let style = opponent ? { marginTop: '-80vh' } : {};
+    let style = opponent ? { marginTop: '-85vh' } : {};
 
     return (
         <div className="deck-container" style={style}>
