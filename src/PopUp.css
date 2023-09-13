@@ -1,0 +1,33 @@
+.pop-up-container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70vw; /* Adjust the width as needed */
+    height: 30vh; /* Adjust the height as needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Transparent black background */
+    border-radius: 10px; /* Rounded corners, adjust as needed */
+    z-index: 1000; /* Adjust the z-index to ensure it's on top of other elements */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; /* Adjust padding as needed */
+}
+
+
+.close-button {
+    position: absolute; /* Position the close button */
+    top: 10px; /* Adjust top position as needed */
+    left: 10px; /* Adjust left position as needed */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff; /* Text color for the X */
+    z-index: 1001; /* Ensure it's on top of the pop-up */
+}
+  
+.close-button:hover {
+    color: #ff0000; /* Change color on hover, if desired */
+}

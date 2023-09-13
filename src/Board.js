@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Cards from './Cards.js'
 import OppCards from './OppCards.js'
 import EndTurnButton from './EndTurnButton.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js'
+import PopUp from './PopUp.js'
 
 const Board = ({ cards, playCard, selectIdx, setSelectIdx, oppCards, endTurnButtonOnClick, isTurn }) => {
   const boardStyle = {
@@ -28,16 +29,26 @@ const Board = ({ cards, playCard, selectIdx, setSelectIdx, oppCards, endTurnButt
     }
   };
 
+  const [showPopUp, setShowPopUp] = useState(false);
+  const onClose = () => {
+    setShowPopUp(false);
+  };
+
+  const onOpen = () => {
+    setShowPopUp(true);
+  }
+
   return (
     <div style={boardStyle} ref={(div) => (divElement = div)} onClick={handleBoardClick}>
       <div style={lineStyle}></div>
       <Cards cards={cards} selectIdx={selectIdx} setSelectIdx={setSelectIdx} />
       <OppCards cards={oppCards} />
       <EndTurnButton onClick={endTurnButtonOnClick} isTurn={isTurn} />
-      <Graveyard cards={cards} />
-      <Graveyard cards={cards} opponent />
+      <Graveyard cards={cards} onClick = {onOpen}/>
+      <Graveyard cards={cards} opponent onClick = {onOpen} />
       <Deck cardCnt={10} />
       <Deck cardCnt={10} opponent />
+      <PopUp cards={cards} onClose = {onClose} showPopUp = {showPopUp} />
     </div>
   );
 };
