@@ -37,12 +37,11 @@ const Card = ({ type, graveyard, hoverEffect, onClick, selected, deck, glowing, 
     }
   }
 
-  const cardTypeText = cardTypes[type] || { className: '', label: 'Default' };
-  const numText = num ? num:''; 
+  // const cardTypeText = cardTypes[type] || { className: '', label: 'Default' };
+  const numText = num ? "x" + num : '';
   return (
     <div className={`card ${type} ${hoverEffectClass} ${outlineClass} ${shiftupClass} ${glowingClass}`} style={style}
       onClick={() => { if (onClick) { onClick() } }}>
-      <b>{cardTypeText.label}</b>
       <b>{numText}</b>
     </div>
   );

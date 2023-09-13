@@ -1,7 +1,7 @@
 /* Card.css */
 .card {
-    width: 80px;
-    height: 112px;
+    width: 110px; /*322 x 448 */
+    height: 154px;
     border: 2px solid #000;
     border-radius: 10px;
     text-align: center;
@@ -10,30 +10,33 @@
     justify-content: space-between;
     padding: 10px;
     transition: transform 0.4s;
+    background-size: cover;
 }
 
+
 .swamp {
-    background: rgb(87, 84, 82);
+    background-image: url('https://images.saymedia-content.com/.image/ar_3:2%2Cc_limit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_672/MTc0NDYxMTU0Njg2NjA5MDMw/best-basic-lands-mtg.jpg')
 }
 
 .forest {
-    background: rgb(17, 101, 58);
+    background-image: url('https://images.saymedia-content.com/.image/ar_3:2%2Cc_limit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_672/MTc0NDYxMTU0Njg1MjMyNzc0/best-basic-lands-mtg.jpg')
 }
 
 .plains {
-    background: rgb(137, 114, 41);
+    background-image: url('https://images.saymedia-content.com/.image/ar_3:2%2Cc_limit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_672/MTc0NDYxMTU0NjgzNTI4ODM4/best-basic-lands-mtg.jpg')
 }
 
 .island {
-    background: rgb(11, 111, 187);
+    background-image: url('https://images.saymedia-content.com/.image/ar_3:2%2Cc_limit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_672/MTc0NDYxMTU0NjgzOTIyMDU0/best-basic-lands-mtg.jpg')
 }
 
 .mountain {
-    background: rgb(179, 42, 52);
+    background-image: url('https://images.saymedia-content.com/.image/ar_3:2%2Cc_limit%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_672/MTc0NDYxMTU0Njg1Mjk4MzEw/best-basic-lands-mtg.jpg');
 }
 
 .unknown {
-    background: rgb(98, 52, 18);
+    /*background: rgb(98, 52, 18);*/
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic.wikia.nocookie.net%2Fmtgsalvation_gamepedia%2Fimages%2Ff%2Ff8%2FMagic_card_back.jpg%2Frevision%2Flatest%3Fcb%3D20140813141013&f=1&nofb=1&ipt=5ffc65a26b640c356142a3309b53aa1134caf4dd5b3aab4eb36c84ad7b7a6015&ipo=images')
 }
 
 .hoverable:hover {
