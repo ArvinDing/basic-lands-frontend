@@ -1,12 +1,10 @@
 .deck-container {
     display: flex;
-    flex-direction: row;
-    /* Display cards from left to right */
-    justify-content: flex-start;
-    /* Align to the left horizontally */
-    align-items: flex-start;
-    /* Align to the top vertically */
-    margin-left: 90%;
+    flex-direction: row-reverse; /* Display cards from right to left */
+    justify-content: flex-start; /* Align to the left horizontally */
+    align-items: flex-start; /* Align to the top vertically */
+    margin-left: 90%; /* Reduce margin-left to create space for cards */
     margin-top: 0%;
-    width: 150px;
+    width: 90px;
+    position: relative;
 }

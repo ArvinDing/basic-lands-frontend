@@ -10,3 +10,11 @@
     padding: 20px;
     margin-top: 0px;
 }
+
+.card b {
+    position: relative;
+    bottom: 10px; /* Adjust this value as needed */
+    left: 0vh; /* Center horizontally */
+    top: 15vh;
+    font-size: 20px;
+}
