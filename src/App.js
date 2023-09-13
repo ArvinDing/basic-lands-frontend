@@ -34,7 +34,6 @@ class App extends Component {
       loading: false,
       dots: 0,
       joinPage: false,
-      selectIdx: -1
     }
     this.dotsIntervalId = 0;
   }
@@ -89,17 +88,17 @@ class App extends Component {
     this.setState({ loading: true });
   }
 
-  setSelectIdx = (idx) => {
-    if (idx === this.state.selectIdx)
-      this.setState({ selectIdx: -1 })
+  setHandSelectIdx = (idx) => {
+    if (idx === this.state.handSelectIdx)
+      this.setState({ handSelectIdx: -1 })
     else
-      this.setState({ selectIdx: idx })
+      this.setState({ handSelectIdx: idx })
   }
 
   playCard = () => {
-    if(this.state.selectIdx!==-1){
-      alert("played" + this.state.selectIdx)
-      this.setState({ selectIdx: -1 })
+    if(this.state.handSelectIdx!==-1){
+      alert("played" + this.state.handSelectIdx)
+      this.setState({ handSelectIdx: -1 })
     }
   }
 
@@ -114,7 +113,7 @@ class App extends Component {
 
     return (
       <div className="App" style={appStyle}>
-        <Board cards={cardData} playCard={this.playCard} selectIdx={this.state.selectIdx} setSelectIdx={this.setSelectIdx} oppCards={oppCardData} isTurn={this.state.myTurn} endTurnButtonOnClick={() => { this.endTurn() }} />
+        <Board cards={cardData} playCard={this.playCard} handSelectIdx={this.state.handSelectIdx} setHandSelectIdx={this.setHandSelectIdx} oppCards={oppCardData} isTurn={this.state.myTurn} endTurnButtonOnClick={() => { this.endTurn() }} />
       </div>
     );
   }

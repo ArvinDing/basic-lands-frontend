@@ -7,8 +7,7 @@ const Field = ({ cards, playCard, enemy }) => {
   let cntType = {}
 
   cards.forEach((card) => {
-    console.log(card)
-    cntType[card.type]= (cntType[card.type] || 0) +1
+    cntType[card.type] = (cntType[card.type] || 0) + 1
   })
 
   const sortedKeys = Object.keys(cntType).sort();

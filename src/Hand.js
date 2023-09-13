@@ -1,9 +1,8 @@
-// Cards.js
 import React from 'react';
 import Card from './Card';
-import './Cards.css'
+import './Hand.css'
 
-const Cards = ({ cards, selectIdx, setSelectIdx, isTurn }) => {
+const Hand = ({ cards, selectIdx, setSelectIdx, isTurn }) => {
   return (
     <div className="cards-container">
       {cards.map((card, index) => {
@@ -23,4 +22,4 @@ const Cards = ({ cards, selectIdx, setSelectIdx, isTurn }) => {
   );
 };
 
-export default Cards;
+export default Hand;

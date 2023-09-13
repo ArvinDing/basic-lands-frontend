@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Cards from './Cards.js'
+import Cards from './Hand.js'
 import OppCards from './OppCards.js'
 import EndTurnButton from './EndTurnButton.js';
 import Graveyard from './Graveyard.js';
@@ -7,7 +7,11 @@ import Deck from './Deck.js'
 import PopUp from './PopUp.js'
 import Field from './Field.js'
 
-const Board = ({ cards, playCard, selectIdx, setSelectIdx, oppCards, endTurnButtonOnClick, isTurn }) => {
+const Board = ({ cards, playCard, oppCards, endTurnButtonOnClick, isTurn }) => {
+  const [handSelectIdx, setHandSelectIdx] = useState(-1)
+  const [popUpSelectIdx, setPopUpSelectIdx] = useState(-1)
+  const [showPopUp, setShowPopUp] = useState(false);
+  
   const boardStyle = {
     width: '100%',
     height: '100vh',
@@ -22,16 +26,16 @@ const Board = ({ cards, playCard, selectIdx, setSelectIdx, oppCards, endTurnButt
     left: '0',
     right: '0',
   }
+
   let boardRef = null
-  let fieldRef = null
 
   const handleBoardClick = (event) => {
-    if (event.target === boardRef ) {
+    if (event.target === boardRef) {
       playCard()
     }
   };
 
-  const [showPopUp, setShowPopUp] = useState(false);
+
   const onClose = () => {
     setShowPopUp(false);
   };
@@ -43,16 +47,17 @@ const Board = ({ cards, playCard, selectIdx, setSelectIdx, oppCards, endTurnButt
   return (
     <div style={boardStyle} ref={(div) => (boardRef = div)} onClick={handleBoardClick}>
       <div style={lineStyle}></div>
-      <Cards cards={cards} selectIdx={selectIdx} setSelectIdx={setSelectIdx} isTurn={isTurn} />
+      <Cards cards={cards} selectIdx={handSelectIdx} setSelectIdx={setHandSelectIdx} isTurn={isTurn} />
       <OppCards cards={oppCards} />
       <EndTurnButton onClick={endTurnButtonOnClick} isTurn={isTurn} />
-      <Graveyard cards={cards} onClick = {onOpen}/>
-      <Graveyard cards={cards} opponent onClick = {onOpen} />
+      <Graveyard cards={cards} onClick={onOpen} />
+      <Graveyard cards={cards} opponent onClick={onOpen} />
       <Field playCard={playCard} cards={cards} />
-      <Field playCard={playCard} cards={cards} enemy/>
+      <Field playCard={playCard} cards={cards} enemy />
       <Deck cardCnt={10} />
       <Deck cardCnt={10} opponent />
-      <PopUp cards={cards} onClose = {onClose} showPopUp = {showPopUp} />
+      <PopUp cards={cards} onClose={onClose} showPopUp={showPopUp}
+        selectIdx={popUpSelectIdx} setSelectIdx={setPopUpSelectIdx} forest />
     </div>
   );
 };
