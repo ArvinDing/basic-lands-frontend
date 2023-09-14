@@ -51,7 +51,9 @@
 .glowing{
     border: 5px solid rgb(12, 206, 255);
 }
-
+.removeBorder{
+    border: 5px solid red;
+}
 .shiftUp {
     transform: translateY(-20px);
     z-index: 1;

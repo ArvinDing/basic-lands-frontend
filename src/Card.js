@@ -1,21 +1,12 @@
 import React from 'react';
 import './Card.css'; // Import the CSS for styling the card
 
-const cardTypes = {
-  forest: { className: 'forest', label: 'Forest' },
-  island: { className: 'island', label: 'Island' },
-  mountain: { className: 'mountain', label: 'Mountain' },
-  plains: { className: 'plains', label: 'Plains' },
-  swamp: { className: 'swamp', label: 'Swamp' },
-  unknown: { className: 'unknown', label: '?' },
-};
-
-const Card = ({ type, graveyard, hoverEffect, onClick, selected, deck, glowing, hand, field , num}) => {
+const Card = ({ type, graveyard, hoverEffect, onClick, selected, noSelectBorder,deck, glowing, hand, field, num, onRightClick, removeB}) => {
   const hoverEffectClass = hoverEffect ? 'hoverable' : '';
-  const outlineClass = selected ? 'outlined' : '';
+  const outlineClass = (selected && !noSelectBorder) ? 'outlined' : '';
   const shiftupClass = selected ? 'shiftUp' : '';
-  const glowingClass = (glowing && !selected) ? 'glowing' : '';
-
+  const glowingClass = (glowing && !(selected&&!noSelectBorder) &&!removeB) ? 'glowing' : '';
+  const removeBorderClass= (removeB)? 'removeBorder':'' 
   let style = {}
   if (graveyard) {
     style = {
@@ -36,12 +27,16 @@ const Card = ({ type, graveyard, hoverEffect, onClick, selected, deck, glowing, 
       margin: '5px'
     }
   }
-
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+    if(onRightClick)
+      onRightClick();
+  }
   // const cardTypeText = cardTypes[type] || { className: '', label: 'Default' };
   const numText = num ? "x" + num : '';
   return (
-    <div className={`card ${type} ${hoverEffectClass} ${outlineClass} ${shiftupClass} ${glowingClass}`} style={style}
-      onClick={() => { if (onClick) { onClick() } }}>
+    <div className={`card ${type} ${hoverEffectClass} ${outlineClass} ${shiftupClass} ${glowingClass} ${removeBorderClass}`} style={style}
+      onClick={() => { if (onClick) { onClick() } }} onContextMenu={handleContextMenu}>
       <b>{numText}</b>
     </div>
   );

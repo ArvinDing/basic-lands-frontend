@@ -2,17 +2,81 @@ import React from 'react';
 import Card from './Card';
 import './PopUp.css'
 
-const PopUp = ({ cards, onClose, onConfirm, selectIdx, setSelectIdx, showPopUp, type }) => {//add a varible canSelect that determines if you can select cards (swamp forest vs view gy)
+const PopUp = ({ cards, onClose, onConfirm, selectIdx, setSelectIdx, islandDisplay, setIslandDisplay, showPopUp, type }) => {//add a varible canSelect that determines if you can select cards (swamp forest vs view gy)
   if (!showPopUp) return null;
   let popUpText = null;
   if (type === "forest") {
-    popUpText = "Choose a Card to Revive"
+    popUpText = "Choose A Card From Graveyard To Revive"
   } else if (type === "mountain") {
-    popUpText = "Choose a Card to Destroy"
+    popUpText = "Choose A Card From Enemy Field To Destroy"
   } else if (type === "swamp") {
-    popUpText = "Choose a Card to Discard"
+    popUpText = "Choose A Card From Enemy Hand To Discard"
   } else if (type === "island") {
-    popUpText = "Rearrange and Discard to liking"
+    popUpText = "Next 4 Cards. Rearrange And Discard To Liking"
+  } else if (type === "graveyard") {
+    popUpText = "Your Graveyard"
+  } else if (type === "ograveyard") {
+    popUpText = "Enemy Graveyard"
+  }
+
+  let cardElements;
+  if (type === "swamp" || type === "mountain" || type === "forest") {
+    cardElements = cards.map((card, index) => (
+      <Card
+        key={index}
+        type={card.type}
+        onClick={() => { setSelectIdx(index) }}
+        selected={index === selectIdx}
+        glowing={true}
+      />
+    ));
+  } else if (type === "island") {
+    cardElements = []
+    for (const info of islandDisplay) {
+      let idx = info.idx
+      let remove = info.remove
+      let card = cards[idx]
+      cardElements.push(<Card
+        key={idx}
+        type={card.type}
+        onClick={() => {
+          if (selectIdx !== -1 && selectIdx !== idx) {
+            let displaySelectIdx, displayIdx
+            let newIslandDisplay = islandDisplay.map((x, index) => {
+              if (x.idx === selectIdx) {
+                displaySelectIdx = index
+              } else if (x.idx === idx) {
+                displayIdx = index
+              }
+              return x
+            })
+            newIslandDisplay[displaySelectIdx] = islandDisplay[displayIdx]
+            newIslandDisplay[displayIdx] = islandDisplay[displaySelectIdx]
+            setIslandDisplay(newIslandDisplay)
+            setSelectIdx(-1)
+          } else {
+            setSelectIdx(idx)
+          }
+        }}
+        onRightClick={() => {
+          let newIslandDisplay = islandDisplay.map((info) => {
+            if (info.idx === idx) {
+              info.remove = !info.remove
+            }
+            return info
+          })
+          setIslandDisplay(newIslandDisplay)
+        }}
+        selected={idx === selectIdx}
+        noSelectBorder
+        glowing={true}
+        removeB={remove}
+      />)
+    }
+  } else {
+    cardElements = cards.map((card, index) => (
+      <Card key={index} type={card.type} />
+    ));
   }
 
   return (
@@ -22,23 +86,7 @@ const PopUp = ({ cards, onClose, onConfirm, selectIdx, setSelectIdx, showPopUp, 
         {(popUpText) ? <b>{popUpText}</b> : null}
       </div>
       <div className="pop-up-card-container">
-        {(type !== "graveyard") ?
-          (cards.map((card, index) => {
-            if (index == selectIdx) {
-              return (
-                <Card key={index} type={card.type}
-                  onClick={() => { setSelectIdx(index) }} selected={true} glowing={true} />
-              );
-            } else {
-              return (
-                <Card key={index} type={card.type}
-                  onClick={() => { setSelectIdx(index) }} glowing={true} />
-              );
-            }
-          }))
-          : cards.map((card, index) => (
-            <Card key={index} type={card.type} />
-          ))}
+        {cardElements}
       </div>
       {(type !== "graveyard") ?
         <div style={{ justifyContent: "center", display: "flex" }}>

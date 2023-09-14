@@ -33,6 +33,7 @@ const cardData3 = [
   { type: "forest" },
   { type: "forest" },
   { type: "forest" },
+  { type: "mountain" }
 ]
 
 const oppCardData = [
@@ -53,6 +54,8 @@ class App extends Component {
       joinPage: false,
       handSelectIdx: -1,
       savedHandSelectIdx: -1,
+      islandDisplay: null,  /*could be [{ idx: 0, remove: false }, { idx: 1, remove: false },
+      { idx: 2, remove: false }, { idx: 3, remove: false }],*/
       gameState: {
         hand: cardData,
         oppHand: oppCardData,
@@ -71,6 +74,7 @@ class App extends Component {
       }
     }
     this.dotsIntervalId = 0;
+    this.setIslandDisplay = this.setIslandDisplay.bind(this);
   }
 
   componentDidMount() {
@@ -123,11 +127,16 @@ class App extends Component {
     this.setState({ loading: true });
   }
 
+  setIslandDisplay(x) {
+    console.log(x)
+    this.setState({ islandDisplay: x });
+  }
+
   setHandSelectIdx = (idx) => {
     if (idx === this.state.handSelectIdx)
-      this.setState({ handSelectIdx: -1 })
+      this.setState({ handSelectIdx: -1 });
     else
-      this.setState({ handSelectIdx: idx })
+      this.setState({ handSelectIdx: idx });
   }
 
   placeCard = () => {
@@ -135,14 +144,12 @@ class App extends Component {
     let handIdx = this.state.handSelectIdx;
     if (handIdx === -1) return;
     let type = gameState.hand[handIdx].type
-    if (type === "plain") {
+    if (type === "plains") {
       //need to annouce im playing plain
-      alert("i playing plain" + handIdx)
-
+      alert("i playing plains" + handIdx)
     } else if (type === "island") {
       //need to query for top 4
       alert("give me the top 4 on deck for island")
-
     } else if (type === "swamp") {
       //need to query for actual oppHand, is currently hidden
       alert("give me opponent hand")
@@ -196,7 +203,8 @@ class App extends Component {
           handSelectIdx={this.state.handSelectIdx} setHandSelectIdx={this.setHandSelectIdx}
           isTurn={this.state.myTurn} endTurnButtonOnClick={() => { this.endTurn() }}
           popUp={this.state.popUp} setPopUp={(x) => { this.setState({ popUp: x }) }}
-          emitPlayCard={this.emitPlayCard} />
+          emitPlayCard={this.emitPlayCard} islandDisplay={this.state.islandDisplay}
+          setIslandDisplay={this.setIslandDisplay} />
       </div>
     );
   }
