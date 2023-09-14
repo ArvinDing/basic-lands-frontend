@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import './Field.css'
 
-const Field = ({ cards, playCard, enemy }) => {
+const Field = ({ cards, onClick, enemy }) => {
   const enemyClass = (enemy) ? 'enemyField' : '';
   let cntType = {}
 
@@ -17,7 +17,7 @@ const Field = ({ cards, playCard, enemy }) => {
       {
         sortedKeys.map((type, index) => {
           return (
-            <Card key={index} onClick={() => { if (!enemy) playCard() }} type={type} field num={cntType[type]} />
+            <Card key={index} onClick={() => { onClick() }} type={type} field num={cntType[type]} />
           );
         })
       }

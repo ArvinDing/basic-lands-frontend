@@ -3,7 +3,6 @@ import JoinPage from './JoinPage.js'
 
 import io from 'socket.io-client'
 import React, { Component } from 'react';
-
 const cardData = [
   { type: "swamp" },
   { type: "plains" },
@@ -16,6 +15,25 @@ const cardData = [
   { type: "island" },
   { type: "forest" }
 ];
+
+const cardData1 = [
+  { type: "swamp" },
+  { type: "swamp" },
+  { type: "swamp" },
+]
+
+
+const cardData2 = [
+  { type: "mountain" },
+  { type: "swamp" },
+  { type: "mountain" },
+]
+
+const cardData3 = [
+  { type: "forest" },
+  { type: "forest" },
+  { type: "forest" },
+]
 
 const oppCardData = [
   { type: "unknown" }
@@ -30,10 +48,27 @@ class App extends Component {
     super(props);
     this.socket = null;
     this.state = {
-      myTurn: true,
       loading: false,
       dots: 0,
       joinPage: false,
+      handSelectIdx: -1,
+      savedHandSelectIdx: -1,
+      gameState: {
+        hand: cardData,
+        oppHand: oppCardData,
+        field: cardData2,
+        oppField: cardData3,
+        graveyard: cardData,
+        oppGraveyard: cardData1,
+        deck: cardData,
+        oppDeck: cardData,
+        isTurn: true
+      },
+      popUp: {
+        enabled: false,
+        cards: [],
+        type: null
+      }
     }
     this.dotsIntervalId = 0;
   }
@@ -83,7 +118,7 @@ class App extends Component {
   }
 
   enteredGameID(gameID) {
-    console.log("game id" + gameID);
+    alert("join game " + gameID)
     this.socket.emit("join game", gameID);
     this.setState({ loading: true });
   }
@@ -95,11 +130,55 @@ class App extends Component {
       this.setState({ handSelectIdx: idx })
   }
 
-  playCard = () => {
-    if(this.state.handSelectIdx!==-1){
-      alert("played" + this.state.handSelectIdx)
-      this.setState({ handSelectIdx: -1 })
+  placeCard = () => {
+    let gameState = this.state.gameState
+    let handIdx = this.state.handSelectIdx;
+    if (handIdx === -1) return;
+    let type = gameState.hand[handIdx].type
+    if (type === "plain") {
+      //need to annouce im playing plain
+      alert("i playing plain" + handIdx)
+
+    } else if (type === "island") {
+      //need to query for top 4
+      alert("give me the top 4 on deck for island")
+
+    } else if (type === "swamp") {
+      //need to query for actual oppHand, is currently hidden
+      alert("give me opponent hand")
+      this.setState({
+        popUp: {
+          enabled: true,
+          cards: gameState.oppHand,
+          type: type,
+        }
+      })
+    } else if (type === "mountain") {
+      this.setState({
+        popUp: {
+          enabled: true,
+          cards: gameState.oppField,
+          type: type,
+        }
+      })
+    } else if (type === "forest") {
+      this.setState({
+        popUp: {
+          enabled: true,
+          cards: gameState.graveyard,
+          type: type,
+        }
+      })
     }
+    this.setState({ savedHandSelectIdx: this.state.handSelectIdx })
+    this.setState({ handSelectIdx: -1 })
+  }
+
+  emitPlayCard = (popUpIndex) => {
+    let gameState = this.state.gameState
+    let handIdx = this.state.savedHandSelectIdx;
+    let type = gameState.hand[handIdx].type
+    alert("type" + type + " " + popUpIndex + " " + this.state.popUp.cards[popUpIndex].type)
   }
 
   render() {
@@ -113,7 +192,11 @@ class App extends Component {
 
     return (
       <div className="App" style={appStyle}>
-        <Board cards={cardData} playCard={this.playCard} handSelectIdx={this.state.handSelectIdx} setHandSelectIdx={this.setHandSelectIdx} oppCards={oppCardData} isTurn={this.state.myTurn} endTurnButtonOnClick={() => { this.endTurn() }} />
+        <Board state={this.state.gameState} placeCard={this.placeCard}
+          handSelectIdx={this.state.handSelectIdx} setHandSelectIdx={this.setHandSelectIdx}
+          isTurn={this.state.myTurn} endTurnButtonOnClick={() => { this.endTurn() }}
+          popUp={this.state.popUp} setPopUp={(x) => { this.setState({ popUp: x }) }}
+          emitPlayCard={this.emitPlayCard} />
       </div>
     );
   }

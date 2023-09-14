@@ -1,7 +1,7 @@
-// OppCards.js - opponent hand
+// Opponent hand
 import React from 'react';
 import Card from './Card';
-import './OppCards.css'
+import './OppHand.css'
 
 const OppCards = ({ cards }) => {
   return (

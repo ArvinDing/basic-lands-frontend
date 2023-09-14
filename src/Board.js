@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import Cards from './Hand.js'
-import OppCards from './OppCards.js'
+import Hand from './Hand.js'
+import OppHand from './OppHand.js'
 import EndTurnButton from './EndTurnButton.js';
 import Graveyard from './Graveyard.js';
 import Deck from './Deck.js'
 import PopUp from './PopUp.js'
 import Field from './Field.js'
 
-const Board = ({ cards, playCard, oppCards, endTurnButtonOnClick, isTurn }) => {
-  const [handSelectIdx, setHandSelectIdx] = useState(-1)
+const Board = ({ state, handSelectIdx,setHandSelectIdx, placeCard, endTurnButtonOnClick, popUp, setPopUp, emitPlayCard}) => {
   const [popUpSelectIdx, setPopUpSelectIdx] = useState(-1)
-  const [showPopUp, setShowPopUp] = useState(false);
-  
+  const hand = state.hand
+  const isTurn = state.isTurn
   const boardStyle = {
     width: '100%',
     height: '100vh',
@@ -31,33 +30,37 @@ const Board = ({ cards, playCard, oppCards, endTurnButtonOnClick, isTurn }) => {
 
   const handleBoardClick = (event) => {
     if (event.target === boardRef) {
-      playCard()
+      placeCard()
     }
   };
 
 
   const onClose = () => {
-    setShowPopUp(false);
+    setPopUp({ enabled: false });
   };
 
-  const onOpen = () => {
-    setShowPopUp(true);
+  const openGraveyard = () => {
+    setPopUp({ enabled: true, cards: state.graveyard, type: "graveyard" });
+  }
+
+  const openOppGraveyard = () => {
+    setPopUp({ enabled: true, cards: state.oppGraveyard, type: "graveyard" });
   }
 
   return (
     <div style={boardStyle} ref={(div) => (boardRef = div)} onClick={handleBoardClick}>
       <div style={lineStyle}></div>
-      <Cards cards={cards} selectIdx={handSelectIdx} setSelectIdx={setHandSelectIdx} isTurn={isTurn} />
-      <OppCards cards={oppCards} />
+      <Hand cards={hand} selectIdx={handSelectIdx} setSelectIdx={setHandSelectIdx} isTurn={isTurn} />
+      <OppHand cards={state.oppHand} />
       <EndTurnButton onClick={endTurnButtonOnClick} isTurn={isTurn} />
-      <Graveyard cards={cards} onClick={onOpen} />
-      <Graveyard cards={cards} opponent onClick={onOpen} />
-      <Field playCard={playCard} cards={cards} />
-      <Field playCard={playCard} cards={cards} enemy />
+      <Graveyard cards={state.oppGraveyard} opponent onClick={openOppGraveyard} />
+      <Graveyard cards={state.graveyard} onClick={openGraveyard} />
+      <Field onClick={placeCard} cards={state.field} />
+      <Field onClick={placeCard} cards={state.oppField} enemy />
       <Deck cardCnt={10} />
       <Deck cardCnt={10} opponent />
-      <PopUp cards={cards} onClose={onClose} showPopUp={showPopUp}
-        selectIdx={popUpSelectIdx} setSelectIdx={setPopUpSelectIdx} forest />
+      <PopUp cards={popUp.cards} onConfirm={()=>emitPlayCard(popUpSelectIdx)} onClose={onClose} showPopUp={popUp.enabled}
+        selectIdx={popUpSelectIdx} setSelectIdx={setPopUpSelectIdx} type={popUp.type} />
     </div>
   );
 };
