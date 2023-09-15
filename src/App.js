@@ -103,7 +103,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log("mounting")
-    this.socket = io('ws://localhost:3001');
+    this.socket = io('ws://54.219.175.135:3001');
     console.log(this.socket)
 
     this.socket.on("board state", (board_info) => {
