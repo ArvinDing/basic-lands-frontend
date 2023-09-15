@@ -6,15 +6,15 @@ const Hand = ({ cards, selectIdx, setSelectIdx, isTurn }) => {
   return (
     <div className="cards-container">
       {cards.map((card, index) => {
-        if (index == selectIdx) {
+        if (index === selectIdx) {
           return (
             <Card key={index} type={card.type} hoverEffect={true}
-              onClick={() => setSelectIdx(index)} selected={true} glowing={isTurn} hand />
+              onClick={() => setSelectIdx(index)} selected={true} glowing={isTurn} hand oppSee={card.oppSee} />
           );
         } else {
           return (
             <Card key={index} type={card.type} hoverEffect={true}
-              onClick={() => setSelectIdx(index)} glowing={isTurn} hand />
+              onClick={() => setSelectIdx(index)} glowing={isTurn} hand oppSee={card.oppSee}/>
           );
         }
       })}

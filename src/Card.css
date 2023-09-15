@@ -58,3 +58,17 @@
     transform: translateY(-20px);
     z-index: 1;
 }
+
+.card .eye-icon{
+    position: relative;
+    top: -13vh;
+    left: 3vh;
+}
+
+.card b {
+    position: relative;
+    bottom: 10px; /* Adjust this value as needed */
+    left: 0vh; /* Center horizontally */
+    top: 15vh;
+    font-size: 20px;
+}

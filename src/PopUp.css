@@ -3,7 +3,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 75vw; /* Adjust the width as needed */
+    width: 75vh; /* Adjust the width as needed */
     height: 35vh; /* Adjust the height as needed */
     background-color: rgba(0, 0, 0, 0.6); /* Transparent black background */
     border-radius: 10px; /* Rounded corners, adjust as needed */

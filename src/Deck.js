@@ -7,13 +7,14 @@ const Deck = ({ cardCnt, opponent }) => {
     for (let i = 0; i < cardCnt; i++) {
         cards.push({ type: "unknown" })
     }
-    let style = opponent ? { marginTop: '-85vh' } : {};
+    let style = !opponent ? { top: '65vh' } : {};
 
     return (
         <div className="deck-container" style={style}>
             {cards.map((card, index) => (
                 <Card key={index} type={card.type} deck />
             ))}
+            <b>x{cardCnt}</b>
         </div>
     );
 };

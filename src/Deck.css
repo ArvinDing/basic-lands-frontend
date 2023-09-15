@@ -3,8 +3,15 @@
     flex-direction: row-reverse; /* Display cards from right to left */
     justify-content: flex-start; /* Align to the left horizontally */
     align-items: flex-start; /* Align to the top vertically */
-    margin-left: 90%; /* Reduce margin-left to create space for cards */
-    margin-top: 0%;
+    right: 20vh; /* Reduce margin-left to create space for cards */
+    top: 15vh;
     width: 90px;
+    position: absolute;
+}
+
+.deck-container b {
     position: relative;
+    left: -50%;
+    top: 16.5vh;
+    font-size: 20px;
 }

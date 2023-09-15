@@ -7,7 +7,7 @@ import Deck from './Deck.js'
 import PopUp from './PopUp.js'
 import Field from './Field.js'
 
-const Board = ({ state, handSelectIdx, setHandSelectIdx, placeCard, endTurnButtonOnClick, popUp, setPopUp, emitPlayCard, islandDisplay, setIslandDisplay }) => {
+const Board = ({ state, handSelectIdx, setHandSelectIdx, placeCard, endTurnButtonOnClick, popUp, setPopUp, emitPlayCard, islandDisplay, setIslandDisplay}) => {
   const [popUpSelectIdx, setPopUpSelectIdx] = useState(-1)
   const updatePopUpSelectIdx = (x) => {
     if (x === popUpSelectIdx) {
@@ -64,8 +64,8 @@ const Board = ({ state, handSelectIdx, setHandSelectIdx, placeCard, endTurnButto
       <Graveyard cards={state.graveyard} onClick={openGraveyard} />
       <Field onClick={placeCard} cards={state.field} />
       <Field onClick={placeCard} cards={state.oppField} enemy />
-      <Deck cardCnt={10} />
-      <Deck cardCnt={10} opponent />
+      <Deck cardCnt={state.deckCnt} />
+      <Deck cardCnt={state.oppDeckCnt} opponent />
       <PopUp cards={popUp.cards} onConfirm={() => emitPlayCard(popUpSelectIdx)} onClose={onClose} showPopUp={popUp.enabled}
         selectIdx={popUpSelectIdx} setSelectIdx={updatePopUpSelectIdx} type={popUp.type}
         islandDisplay={islandDisplay} setIslandDisplay={setIslandDisplay} />

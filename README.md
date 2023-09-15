@@ -5,6 +5,10 @@ TODO
 - work on negating
 - work on looking at opponent hand and choosing one
 - mountain special feature
+- ~~plain ~~
+- ~~swamp ~~
+- ~~mountain~~
+- forest
 
 ### `npm start`
 

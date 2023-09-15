@@ -3,7 +3,7 @@ import Card from './Card';
 import './Graveyard.css'
 
 const Graveyard = ({ cards, opponent, onClick }) => {
-  let style = !opponent ? { marginTop: '10%' } : {};
+  let style = !opponent ? { top: '60vh' } : {};
   return (
     <div className="graveyard-container" style={style}>
       {cards.map((card, index) => (
