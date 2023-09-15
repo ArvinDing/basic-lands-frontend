@@ -91,8 +91,8 @@ const PopUp = ({ cards, onClose, onConfirm, selectIdx, setSelectIdx, islandDispl
       {(type !== "graveyard") ?
         <div style={{ justifyContent: "center", display: "flex" }}>
           <button className="confirm-button" onClick={() => {
-            onConfirm()
-            onClose()
+            if(onConfirm())
+              onClose()
           }}>Confirm!</button> {/* Close button */}
         </div> : null
       }
