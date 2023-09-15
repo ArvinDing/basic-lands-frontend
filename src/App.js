@@ -297,7 +297,7 @@ class App extends Component {
     if (handIdx < visibleCnt) {
       this.socket.emit("play card", { index: handIdx, visible: true })
     } else {
-      this.socket.emit("play card", { index: handIdx, visible: false })
+      this.socket.emit("play card", { index: handIdx- visibleCnt, visible: false })
     }
   }
 
