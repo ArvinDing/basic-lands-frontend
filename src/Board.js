@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Hand from './Hand.js'
 import OppHand from './OppHand.js'
 import EndTurnButton from './EndTurnButton.js';
@@ -7,15 +7,7 @@ import Deck from './Deck.js'
 import PopUp from './PopUp.js'
 import Field from './Field.js'
 
-const Board = ({ state, handSelectIdx, setHandSelectIdx, placeCard, endTurnButtonOnClick, popUp, setPopUp, emitPlayCard, islandDisplay, setIslandDisplay}) => {
-  const [popUpSelectIdx, setPopUpSelectIdx] = useState(-1)
-  const updatePopUpSelectIdx = (x) => {
-    if (x === popUpSelectIdx) {
-      setPopUpSelectIdx(-1)
-    } else {
-      setPopUpSelectIdx(x)
-    }
-  }
+const Board = ({ state, handSelectIdx, setHandSelectIdx, placeCard, endTurnButtonOnClick, popUp, setPopUp, onConfirm, islandDisplay, setIslandDisplay }) => {
   const hand = state.hand
   const isTurn = state.isTurn
   const boardStyle = {
@@ -47,11 +39,14 @@ const Board = ({ state, handSelectIdx, setHandSelectIdx, placeCard, endTurnButto
   };
 
   const openGraveyard = () => {
+    if (popUp.enabled)
+      return;
     setPopUp({ enabled: true, cards: state.graveyard, type: "graveyard" });
   }
 
   const openOppGraveyard = () => {
-    setPopUp({ enabled: true, cards: state.oppGraveyard, type: "ograveyard" });
+    if (popUp.enabled)
+      setPopUp({ enabled: true, cards: state.oppGraveyard, type: "ograveyard" });
   }
 
   return (
@@ -66,8 +61,7 @@ const Board = ({ state, handSelectIdx, setHandSelectIdx, placeCard, endTurnButto
       <Field onClick={placeCard} cards={state.oppField} enemy />
       <Deck cardCnt={state.deckCnt} />
       <Deck cardCnt={state.oppDeckCnt} opponent />
-      <PopUp cards={popUp.cards} onConfirm={() => emitPlayCard(popUpSelectIdx)} onClose={onClose} showPopUp={popUp.enabled}
-        selectIdx={popUpSelectIdx} setSelectIdx={updatePopUpSelectIdx} type={popUp.type}
+      <PopUp popUp={popUp} onConfirm={onConfirm} onClose={onClose}
         islandDisplay={islandDisplay} setIslandDisplay={setIslandDisplay} />
     </div>
   );

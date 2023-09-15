@@ -4,7 +4,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 75vh; /* Adjust the width as needed */
-    height: 35vh; /* Adjust the height as needed */
+    height: 40vh; /* Adjust the height as needed */
     background-color: rgba(0, 0, 0, 0.6); /* Transparent black background */
     border-radius: 10px; /* Rounded corners, adjust as needed */
     z-index: 1000; /* Adjust the z-index to ensure it's on top of other elements */
@@ -36,6 +36,7 @@
     flex-direction: row;
     padding: 20px 20px 0px 20px;
     justify-content: center;
+    height: 20vh;
 }
 
 .close-button {
@@ -65,6 +66,9 @@
     color: #00ff00;
 }
   
+.red-hover:hover{
+    color: red;
+}
 .close-button:hover {
     color: #ff0000; /* Change color on hover, if desired */
 }

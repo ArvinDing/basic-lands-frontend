@@ -5,39 +5,6 @@ import Chat from './Chat.js'
 import io from 'socket.io-client'
 import React, { Component } from 'react';
 
-const cardData = [
-  { type: "swamp" },
-  { type: "plains" },
-  { type: "mountain" },
-  { type: "island" },
-  { type: "forest" },
-  { type: "swamp" },
-  { type: "plains" },
-  { type: "mountain" },
-  { type: "island" },
-  { type: "forest" }
-];
-
-const cardData1 = [
-  { type: "swamp" },
-  { type: "swamp" },
-  { type: "swamp" },
-]
-
-
-const cardData2 = [
-  { type: "mountain" },
-  { type: "swamp" },
-  { type: "mountain" },
-]
-
-const cardData3 = [
-  { type: "forest" },
-  { type: "forest" },
-  { type: "forest" },
-  { type: "mountain" }
-]
-
 const cardTypes =
 {
   swamp: { type: "swamp" },
@@ -59,7 +26,7 @@ const MOUNTAIN_SELECT = 1;
 const FOREST_SELECT = 2;
 const ISLAND_SELECT = 3;
 const SWAMP_SELECT = 4;
-const WAIT_FOR_ISLAND_COUNTER = 5;
+const COUNTER_SELECT = 5;
 const GAME_OVER = 6;
 
 const repeat = (value, times) => {
@@ -82,20 +49,21 @@ class App extends Component {
         state: -1,
         deckCnt: 0,
         oppDeckCnt: 0,
-        hand: cardData,
-        oppHand: cardData,
-        field: cardData2,
-        oppField: cardData3,
-        graveyard: cardData,
-        oppGraveyard: cardData1,
-        deck: cardData,
-        oppDeck: cardData,
+        hand: [],
+        oppHand: [],
+        field: [],
+        oppField: [],
+        graveyard: [],
+        oppGraveyard: [],
+        deck: [],
+        oppDeck: [],
         isTurn: true
       },
       popUp: {
         enabled: false,
         cards: [],
-        type: null
+        type: null,
+        counterType: null
       },
       chat: [{ message: "Welcome!", talkingAboutYou: false }]
     }
@@ -159,6 +127,7 @@ class App extends Component {
         },
         visibleCnt: board_info.cards[0].hand.visible.length
       });
+      let counterType="forest"
       if (board_info.myTurn) {
         if (board_info.state === ISLAND_SELECT) {
           console.log("island select")
@@ -195,6 +164,15 @@ class App extends Component {
               type: "swamp",
             }
           })
+        } else if (board_info.state === COUNTER_SELECT) {
+          this.setState({
+            popUp: {
+              enabled: true,
+              cards: hand,
+              type: "counter",
+              counterType:counterType 
+            }
+          })
         }
       }
     });
@@ -212,7 +190,7 @@ class App extends Component {
 
     this.dotsIntervalId = setInterval(() => {
       this.setState({ dots: (this.state.dots + 1) % 4 });
-    }, 500)
+    }, 1000)
   }
 
   componentWillUnmount() {
@@ -251,18 +229,8 @@ class App extends Component {
     let handIdx = this.state.handSelectIdx;
     if (handIdx === -1) return;
     let type = gameState.hand[handIdx].type
-    if (type === "plains") {
-      //need to annouce im playing plain
-      this.emitPlayCard()
-    } else if (type === "island") {
-      //need to query for top 4
-      this.emitPlayCard()
-    } else if (type === "swamp") {
-      //need to query for actual oppHand, is currently hidden
-      this.emitPlayCard()
-    } else if (type === "mountain") {
-      this.emitPlayCard()
-    } else if (type === "forest") {
+    if (type === "plains" || type === "island" || type === "swamp"
+      || type === "mountain" || type === "forest") {
       this.emitPlayCard()
     }
     this.setState({ handSelectIdx: -1 })
@@ -289,6 +257,16 @@ class App extends Component {
         }
       }
       this.socket.emit("island select", changed)
+    } else if (gameState.state === COUNTER_SELECT) {
+      //popUpIndex should be an array
+      let visibleCnt = this.state.visibleCnt;
+      this.socket.emit("counter select", popUpIndex.map(idx => {
+        if (idx < visibleCnt) {
+          return { index: idx, visible: true };
+        } else {
+          return { index: idx - visibleCnt, visible: false };
+        }
+      }))
     }
     return true;
   }
@@ -311,7 +289,7 @@ class App extends Component {
 
     if (this.state.joinPage) {
       return (
-      <JoinPage onClick={(gameId, name) => this.enteredInfo(gameId, name)} />)
+        <JoinPage onClick={(gameId, name) => this.enteredInfo(gameId, name)} />)
     }
 
     return (
@@ -320,7 +298,7 @@ class App extends Component {
           handSelectIdx={this.state.handSelectIdx} setHandSelectIdx={this.setHandSelectIdx}
           isTurn={this.state.myTurn} endTurnButtonOnClick={() => { this.endTurn() }}
           popUp={this.state.popUp} setPopUp={(x) => { this.setState({ popUp: x }) }}
-          emitPlayCard={this.playCardConfirm} islandDisplay={this.state.islandDisplay}
+          onConfirm={this.playCardConfirm} islandDisplay={this.state.islandDisplay}
           setIslandDisplay={this.setIslandDisplay} />
         <Chat messages={this.state.chat} />
       </div>
