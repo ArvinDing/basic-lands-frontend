@@ -17,6 +17,8 @@ const PopUp = ({ cards, onClose, onConfirm, selectIdx, setSelectIdx, islandDispl
     popUpText = "Your Graveyard"
   } else if (type === "ograveyard") {
     popUpText = "Enemy Graveyard"
+  } else if (type === "countering") {
+    popUpText = "Counter?"
   }
 
   let cardElements;

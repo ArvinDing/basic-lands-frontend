@@ -1,5 +1,6 @@
 import Board from './Board.js'
 import JoinPage from './JoinPage.js'
+import Chat from './Chat.js'
 
 import io from 'socket.io-client'
 import React, { Component } from 'react';
@@ -95,7 +96,8 @@ class App extends Component {
         enabled: false,
         cards: [],
         type: null
-      }
+      },
+      chat: [{ message: "Welcome!", talkingAboutYou: false }]
     }
     this.dotsIntervalId = 0;
     this.setIslandDisplay = this.setIslandDisplay.bind(this);
@@ -105,7 +107,9 @@ class App extends Component {
     console.log("mounting")
     this.socket = io('ws://54.219.175.135:3001');
     console.log(this.socket)
-
+    this.socket.on("log", (msg) => {
+      this.setState({ chat: this.state.chat.concat(msg) })
+    })
     this.socket.on("board state", (board_info) => {
       console.log("board state changed" + board_info)
       //visible on the left and hidden on the right
@@ -157,7 +161,8 @@ class App extends Component {
       });
       if (board_info.myTurn) {
         if (board_info.state === ISLAND_SELECT) {
-          console.log(top4 + " " + islandDisplay)
+          console.log("island select")
+          console.log(top4)
           this.setState({
             popUp: {
               enabled: true,
@@ -204,7 +209,7 @@ class App extends Component {
       console.log("waiting for other player")
       alert("waiting for other player")
     })
-    
+
     this.dotsIntervalId = setInterval(() => {
       this.setState({ dots: (this.state.dots + 1) % 4 });
     }, 500)
@@ -223,8 +228,8 @@ class App extends Component {
     this.socket.emit("end turn", {});
   }
 
-  enteredGameID(gameID) {
-    this.socket.emit("join game", gameID);
+  enteredInfo(gameID, name) {
+    this.socket.emit("join game", { id: gameID, name: name });
     this.setState({ joinPage: false })
     this.setState({ loading: true });
   }
@@ -271,7 +276,7 @@ class App extends Component {
     } else if (gameState.state === MOUNTAIN_SELECT) {
       console.log(this.state.popUp.cards)
       console.log(popUpIndex)
-      if (popUpIndex === -1) return false; 
+      if (popUpIndex === -1) return false;
       this.socket.emit("mountain select", { type: this.state.popUp.cards[popUpIndex].type })
     } else if (gameState.state === FOREST_SELECT) {
       if (popUpIndex === -1) return false;
@@ -305,7 +310,8 @@ class App extends Component {
     }
 
     if (this.state.joinPage) {
-      return (<JoinPage onClick={(gameId) => this.enteredGameID(gameId)} />)
+      return (
+      <JoinPage onClick={(gameId, name) => this.enteredInfo(gameId, name)} />)
     }
 
     return (
@@ -316,6 +322,7 @@ class App extends Component {
           popUp={this.state.popUp} setPopUp={(x) => { this.setState({ popUp: x }) }}
           emitPlayCard={this.playCardConfirm} islandDisplay={this.state.islandDisplay}
           setIslandDisplay={this.setIslandDisplay} />
+        <Chat messages={this.state.chat} />
       </div>
     );
   }

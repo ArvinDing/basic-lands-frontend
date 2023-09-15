@@ -4,15 +4,18 @@ import './JoinPage.css'
 const JoinPage = ({ onClick }) => {
   const handleClick = () => {
     const gameIdInput = document.getElementById("gameID");
-    if (gameIdInput) {
+    const nameInput= document.getElementById("name")
+    if (gameIdInput && nameInput) {
       const gameId = gameIdInput.value;
-      onClick(gameId);
+      const name = nameInput.value;
+      onClick(gameId,name);
     }
   }
   return (
     <div className="join-page">
       <h1>Basic Lands Game</h1>
       <input type="text" id="gameID" placeholder="Enter Game ID" />
+      <input type="text" id="name" placeholder="Enter Name" />
       <button className="hoverChange" onClick={handleClick}>Play</button>
     </div>
   );
