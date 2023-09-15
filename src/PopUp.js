@@ -82,16 +82,16 @@ const PopUp = ({ cards, onClose, onConfirm, selectIdx, setSelectIdx, islandDispl
   return (
     <div className="pop-up-container">
       <div className="pop-up-controls-container">
-        ({type === "graveyard" && <button className="close-button" onClick={onClose}>X</button>})
+        {(type === "graveyard" || type === "ograveyard") && <button className="close-button" onClick={onClose}>X</button>}
         {(popUpText) ? <b>{popUpText}</b> : null}
       </div>
       <div className="pop-up-card-container">
         {cardElements}
       </div>
-      {(type !== "graveyard") ?
+      {(type !== "graveyard" && type !== "ograveyard") ?
         <div style={{ justifyContent: "center", display: "flex" }}>
           <button className="confirm-button" onClick={() => {
-            if(onConfirm())
+            if (onConfirm())
               onClose()
           }}>Confirm!</button> {/* Close button */}
         </div> : null
