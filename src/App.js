@@ -271,13 +271,15 @@ class App extends Component {
   playCardConfirm = (popUpIndex) => {
     let gameState = this.state.gameState
     if (gameState.state === SWAMP_SELECT) {
+      if (popUpIndex === -1) return;
       this.socket.emit("swamp select", { index: popUpIndex })
     } else if (gameState.state === MOUNTAIN_SELECT) {
       console.log(this.state.popUp.cards)
       console.log(popUpIndex)
-
+      if (popUpIndex === -1) return;
       this.socket.emit("mountain select", { type: this.state.popUp.cards[popUpIndex].type })
     } else if (gameState.state === FOREST_SELECT) {
+      if (popUpIndex === -1) return;
       this.socket.emit("forest select", { index: popUpIndex })
     } else if (gameState.state === ISLAND_SELECT) {
       let changed = []
@@ -297,7 +299,7 @@ class App extends Component {
     if (handIdx < visibleCnt) {
       this.socket.emit("play card", { index: handIdx, visible: true })
     } else {
-      this.socket.emit("play card", { index: handIdx- visibleCnt, visible: false })
+      this.socket.emit("play card", { index: handIdx - visibleCnt, visible: false })
     }
   }
 
