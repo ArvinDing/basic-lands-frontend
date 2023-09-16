@@ -274,6 +274,10 @@ class App extends Component {
       })
       counterObj.counter = intendToCounter
       if (intendToCounter) {//check that the info we are sending it good
+        if (popUpIndex.length !== 2) {
+          alert("invalid counter need 2 cards")
+          return false;
+        }
         let target = ["island", this.state.popUp.counterType]
         let sCards = [this.state.gameState.hand[popUpIndex[0]].type, this.state.gameState.hand[popUpIndex[1]].type]
         target.sort()
@@ -283,10 +287,9 @@ class App extends Component {
           alert("not the right cards")
           return false;
         }
-        if (popUpIndex.length !== 2) {
-          alert("invalid counter need  2 cards")
-          return false;
-        }
+
+       
+
       }
       this.socket.emit("counter select", counterObj)
     }
