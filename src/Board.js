@@ -46,7 +46,8 @@ const Board = ({ state, handSelectIdx, setHandSelectIdx, placeCard, endTurnButto
 
   const openOppGraveyard = () => {
     if (popUp.enabled)
-      setPopUp({ enabled: true, cards: state.oppGraveyard, type: "ograveyard" });
+      return;
+    setPopUp({ enabled: true, cards: state.oppGraveyard, type: "ograveyard" });
   }
 
   return (
