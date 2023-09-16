@@ -47,7 +47,7 @@ const PopUp = ({ popUp, onClose, onConfirm, islandDisplay, setIslandDisplay }) =
   } else if (type === "ograveyard") {
     popUpText = "Enemy Graveyard";
   } else if (type === "counter") {
-    popUpText = `Counter ${popUp.counterType}?`;
+    popUpText = `Counter by sacrifing island +  ${popUp.counterType}?`;
   }
 
   const onIslandClick = (idx) => {
@@ -148,16 +148,16 @@ const PopUp = ({ popUp, onClose, onConfirm, islandDisplay, setIslandDisplay }) =
   }
 
   const onYesClick = () => {
-    if (onConfirm(counterIdxs)) {
-      onClose();
+    if (onConfirm(counterIdxs, true)) {
       setCounterIdxs([]);
+      onClose();
     }
   }
 
   const onNoClick = () => {
-    if (onConfirm(counterIdxs)) {
-      onClose();
+    if (onConfirm(counterIdxs, false)) {
       setCounterIdxs([]);
+      onClose();
     }
   }
   let yesButton = null

@@ -73,7 +73,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log("mounting")
-    this.socket = io('ws://54.219.175.135:3001');
+    this.socket = io('ws://localhost:3001');
     console.log(this.socket)
     this.socket.on("log", (msg) => {
       this.setState({ chat: this.state.chat.concat(msg) })
@@ -127,7 +127,6 @@ class App extends Component {
         },
         visibleCnt: board_info.cards[0].hand.visible.length
       });
-      let counterType="forest"
       if (board_info.myTurn) {
         if (board_info.state === ISLAND_SELECT) {
           console.log("island select")
@@ -164,13 +163,16 @@ class App extends Component {
               type: "swamp",
             }
           })
-        } else if (board_info.state === COUNTER_SELECT) {
+        }
+      }
+      if (board_info.state === COUNTER_SELECT) {
+        if (board_info.counterInfo.myCounterTurn) {
           this.setState({
             popUp: {
               enabled: true,
               cards: hand,
               type: "counter",
-              counterType:counterType 
+              counterType: board_info.counterInfo.counterCard
             }
           })
         }
@@ -236,7 +238,7 @@ class App extends Component {
     this.setState({ handSelectIdx: -1 })
   }
 
-  playCardConfirm = (popUpIndex) => {
+  playCardConfirm = (popUpIndex, intendToCounter) => {
     let gameState = this.state.gameState
     if (gameState.state === SWAMP_SELECT) {
       if (popUpIndex === -1) return false;
@@ -260,13 +262,33 @@ class App extends Component {
     } else if (gameState.state === COUNTER_SELECT) {
       //popUpIndex should be an array
       let visibleCnt = this.state.visibleCnt;
-      this.socket.emit("counter select", popUpIndex.map(idx => {
+      let counterObj = {}
+      counterObj.cards = popUpIndex.map(idx => {
         if (idx < visibleCnt) {
+          console.log({ index: idx, visible: true })
           return { index: idx, visible: true };
         } else {
+          console.log({ index: idx - visibleCnt, visible: false })
           return { index: idx - visibleCnt, visible: false };
         }
-      }))
+      })
+      counterObj.counter = intendToCounter
+      if (intendToCounter) {//check that the info we are sending it good
+        let target = ["island", this.state.popUp.counterType]
+        let sCards = [this.state.gameState.hand[popUpIndex[0]].type, this.state.gameState.hand[popUpIndex[1]].type]
+        target.sort()
+        sCards.sort()
+     
+        if (!(target.every((value, index) => value === sCards[index]))) {
+          alert("not the right cards")
+          return false;
+        }
+        if (popUpIndex.length !== 2) {
+          alert("invalid counter need  2 cards")
+          return false;
+        }
+      }
+      this.socket.emit("counter select", counterObj)
     }
     return true;
   }
