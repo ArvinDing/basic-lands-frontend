@@ -1,14 +1,18 @@
 TODO
-- Connect play card with backend
-- Update complete board state when recieved update board state
-- implement island selection feature
-- work on negating
-- work on looking at opponent hand and choosing one
-- mountain special feature
-- ~~plain ~~
-- ~~swamp ~~
+- ~~Connect play card with backend~~
+- ~~Update complete board state when recieved update board state~~
+- ~~implement island selection feature~~
+- ~~work on negating~~
+- ~~work on looking at opponent hand and choosing one~~
+- ~~mountain special feature~~
+- ~~plain~~
+- ~~swamp~~
 - ~~mountain~~
-- forest
+- ~~forest~~
+- ~~island~~
+- logging system, replay, elo
+- win page
+- surya's code review
 
 ### `npm start`
 
