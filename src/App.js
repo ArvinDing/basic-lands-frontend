@@ -21,6 +21,8 @@ const appStyle = {
   height: '100%'
 }
 
+const WEBSOCKETIP = "ws://54.193.6.157:3001";
+
 const TURN_START = 0;
 const MOUNTAIN_SELECT = 1;
 const FOREST_SELECT = 2;
@@ -73,7 +75,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log("mounting")
-    this.socket = io('ws://54.219.175.135:3001');
+    this.socket = io(WEBSOCKETIP);
     console.log(this.socket)
     this.socket.on("log", (msg) => {
       this.setState({ chat: this.state.chat.concat(msg) })
