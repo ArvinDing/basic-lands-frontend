@@ -21,7 +21,7 @@ const appStyle = {
   height: '100%'
 }
 
-const WEBSOCKETIP = "ws://localhost:3001";
+const WEBSOCKETIP = "ws://54.177.192.52:3001";
 
 const TURN_START = 0;
 const MOUNTAIN_SELECT = 1;
