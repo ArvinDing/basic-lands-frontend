@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/basiclands/static/css/main.4309ca04.css",
+    "main.js": "/basiclands/static/js/main.44a8ffda.js",
+    "index.html": "/basiclands/index.html",
+    "main.4309ca04.css.map": "/basiclands/static/css/main.4309ca04.css.map",
+    "main.44a8ffda.js.map": "/basiclands/static/js/main.44a8ffda.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4309ca04.css",
+    "static/js/main.44a8ffda.js"
+  ]
+}
