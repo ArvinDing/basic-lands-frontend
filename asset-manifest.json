@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/basic-lands-frontend/static/css/main.4309ca04.css",
-    "main.js": "/basic-lands-frontend/static/js/main.fd0d1e21.js",
+    "main.js": "/basic-lands-frontend/static/js/main.59784716.js",
     "index.html": "/basic-lands-frontend/index.html",
     "main.4309ca04.css.map": "/basic-lands-frontend/static/css/main.4309ca04.css.map",
-    "main.fd0d1e21.js.map": "/basic-lands-frontend/static/js/main.fd0d1e21.js.map"
+    "main.59784716.js.map": "/basic-lands-frontend/static/js/main.59784716.js.map"
   },
   "entrypoints": [
     "static/css/main.4309ca04.css",
-    "static/js/main.fd0d1e21.js"
+    "static/js/main.59784716.js"
   ]
 }
